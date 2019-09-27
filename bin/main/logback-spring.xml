@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="true" scan="true" scanPeriods="30 seconds">
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <property name="logDir" value="D:/projects/intellij_projects/springbootstudy/samplelogs" />
+    <property name="logFileName" value="buylog"/>
+    <appender name="testBuyAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${logDir}/${logFileName}-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>%d{HH:mm:ss.SSS} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="testBuyLogger" level="info" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="testBuyAppender" />
+    </logger>
+</configuration>
