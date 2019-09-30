@@ -26,9 +26,9 @@ public class InitializeRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String [] userIds = {"10", "11", "12", "14", "50"};
-        String [] productIds = {"100", "101", "102", "103", "104", "105"};
-        int [] prices = {20, 1000, 1500, 50, 80, 25000};
+        String [] loginIds = {"microsoft.com", "oracle.com", "adobe.com", "pivotal.com", "jetbrains.com"};
+        String [] productIds = {"1", "2", "3", "4", "5", "6"};
+        int [] prices = {500, 700, 1000, 1200, 900, 1500};
 
         Random random = new Random();
 
@@ -41,7 +41,7 @@ public class InitializeRunner implements CommandLineRunner {
         for(int i=0; i < 1000000; i++) {
 
             // 사용자 아이디 random 추출
-            String userId = userIds[random.nextInt(userIds.length)];
+            String userId = loginIds[random.nextInt(loginIds.length)];
 
             // 상품을 몇가지를 사는지를 random 추출
             int shoppingItemCount = random.nextInt(5) + 1;

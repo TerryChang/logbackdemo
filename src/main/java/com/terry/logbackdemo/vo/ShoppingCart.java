@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 public class ShoppingCart {
-    private String userId;
+    private String loginId;
     List<ShoppingItem> shoppingItemList = new ArrayList<>();
     private long totalPrice;
 
@@ -15,8 +15,8 @@ public class ShoppingCart {
 
     }
 
-    public ShoppingCart(String userId, List<ShoppingItem> shoppingItemList) {
-        this.userId = userId;
+    public ShoppingCart(String loginId, List<ShoppingItem> shoppingItemList) {
+        this.loginId = loginId;
         this.shoppingItemList = shoppingItemList;
         calculateTotalPrice();
     }
@@ -25,10 +25,7 @@ public class ShoppingCart {
         totalPrice = 0L;
         shoppingItemList.forEach(
                 shoppingItem -> {
-                    Product product = shoppingItem.getProduct();
-                    int productPrice = product.getProductPrice();
-                    int totalProductPrice = productPrice * shoppingItem.getCnt();
-                    totalPrice += totalProductPrice;
+                    totalPrice += shoppingItem.getTotalPriceByProduct();
                 }
         );
     }
