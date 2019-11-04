@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration debug="true" scan="true" scanPeriods="30 seconds">
     <include resource="org/springframework/boot/logging/logback/base.xml" />
-    <property name="logDir" value="D:/projects/intellij_projects/springbootstudy/samplelogs" />
+    <springProfile name="home">
+        <property name="logDir" value="D:/projects/springbootstudy/samplelogs" />
+    </springProfile>
+    <springProfile name="notebook">
+        <property name="logDir" value="D:/projects/intellij_projects/springbootstudy/samplelogs" />
+    </springProfile>
     <property name="logFileName" value="buylog"/>
     <appender name="testBuyAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <append>true</append>

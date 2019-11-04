@@ -7,6 +7,22 @@
     <springProfile name="notebook">
         <property name="logDir" value="D:/projects/intellij_projects/springbootstudy/samplelogs" />
     </springProfile>
+    <springProfile name="h2_log4jdbc">
+        <logger name="jdbc.sqlonly" level="off" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+        <logger name="jdbc.sqltiming" level="debug" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+        <logger name="jdbc.audit" level="off" additivity="false" />
+        <logger name="jdbc.resultset" level="off" additivity="false" />
+        <logger name="jdbc.resultsettable" level="off" additivity="false" />
+        <logger name="jdbc.connection" level="off" additivity="false" />
+
+        <logger name="javax.sql" level="info" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+    </springProfile>
     <property name="logFileName" value="buylog"/>
     <appender name="testBuyAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <append>true</append>

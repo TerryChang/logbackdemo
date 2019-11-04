@@ -1,9 +1,10 @@
 package com.terry.logbackdemo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.terry.logbackdemo.vo.Product;
-import com.terry.logbackdemo.vo.ShoppingCart;
-import com.terry.logbackdemo.vo.ShoppingItem;
+import com.terry.logbackdemo.entity.Product;
+import com.terry.logbackdemo.vo.ProductVO;
+import com.terry.logbackdemo.vo.ShoppingCartVO;
+import com.terry.logbackdemo.vo.ShoppingItemVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,31 +28,31 @@ public class JsonTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private ShoppingCart shoppingCart;
+    private ShoppingCartVO shoppingCartVO;
 
     @Before
     public void setup() {
-        Product product100 = new Product("100", 20);
-        Product product101 = new Product("101", 1000);
-        ShoppingItem shoppingItem100 = new ShoppingItem(product100, 3);
-        ShoppingItem shoppingItem101 = new ShoppingItem(product101, 10);
-        List<ShoppingItem> shoppingItemList = new ArrayList<>();
-        shoppingItemList.add(shoppingItem100);
-        shoppingItemList.add(shoppingItem101);
-        shoppingCart = new ShoppingCart("terry", shoppingItemList);
+        ProductVO productVO100 = ProductVO.builder().idx(100L).productPrice(20).build();
+        ProductVO productVO101 = ProductVO.builder().idx(101L).productPrice(1000).build();
+        ShoppingItemVO shoppingItemVO100 = new ShoppingItemVO(productVO100, 3);
+        ShoppingItemVO shoppingItemVO101 = new ShoppingItemVO(productVO101, 10);
+        List<ShoppingItemVO> shoppingItemVOList = new ArrayList<>();
+        shoppingItemVOList.add(shoppingItemVO100);
+        shoppingItemVOList.add(shoppingItemVO101);
+        shoppingCartVO = new ShoppingCartVO("terry", shoppingItemVOList);
     }
 
     @Test
     public void JSON_직렬화_객체를JSON_테스트() throws Exception {
-        String jsonString = objectMapper.writeValueAsString(shoppingCart);
+        String jsonString = objectMapper.writeValueAsString(shoppingCartVO);
         logger.info(jsonString);
     }
 
     @Test
     public void JSON_역직렬화_JSON을객체로_테스트() throws Exception {
-        String jsonString = "{\"userId\":\"terry\",\"shoppingItemList\":[{\"product\":{\"productId\":\"100\",\"productPrice\":20},\"cnt\":3},{\"product\":{\"productId\":\"101\",\"productPrice\":1000},\"cnt\":10}],\"totalPrice\":10060}";
-        ShoppingCart myShoppingCart = objectMapper.readValue(jsonString, ShoppingCart.class);
+        String jsonString = "{\"loginId\":\"terry\",\"shoppingItemList\":[{\"product\":{\"idx\":100,\"productPrice\":20},\"cnt\":3},{\"product\":{\"idx\":101,\"productPrice\":1000},\"cnt\":10}],\"totalPrice\":10060}";
+        ShoppingCartVO myShoppingCartVO = objectMapper.readValue(jsonString, ShoppingCartVO.class);
         // assertThat("foo", equalTo("foo"));
-        assertThat(myShoppingCart).isEqualToComparingFieldByFieldRecursively(shoppingCart);
+        assertThat(myShoppingCartVO).isEqualToComparingFieldByFieldRecursively(shoppingCartVO);
     }
 }
