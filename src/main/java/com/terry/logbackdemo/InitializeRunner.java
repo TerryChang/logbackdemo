@@ -31,7 +31,7 @@ public class InitializeRunner implements CommandLineRunner {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final Logger logger = LoggerFactory.getLogger("testBuyLogger");
-    private final int TOTAL_DATA_CNT = 15;                  // 만들어야 할 총 데이터건수
+    private final int TOTAL_DATA_CNT = 100;                  // 만들어야 할 총 데이터건수
 
     @Override
     public void run(String... args) throws Exception {
